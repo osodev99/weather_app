@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
+
 import 'core/di/injection_container.dart' as di;
+
+import 'features/location/presentation/provider/location_provider.dart';
+import 'features/weather/pages/home_page.dart';
 import 'features/weather/pages/splash_page.dart';
 import 'features/weather/provider/weather_provider.dart';
 
@@ -17,7 +22,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => WeatherProvider())],
+      providers: [
+        ChangeNotifierProvider(create: (_) => WeatherProvider()),
+        ChangeNotifierProvider(
+          create: (_) => LocationProvider(
+            dioClient: di.sl(),
+            prefs: di.sl(),
+            locationApi: di.sl(),
+          ),
+        ),
+      ],
       child: const WeatherApp(),
     );
   }
@@ -31,7 +45,15 @@ class WeatherApp extends StatelessWidget {
     return MaterialApp.router(
       title: 'Weather app',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.blueGrey, useMaterial3: true),
+      theme: ThemeData(
+        scaffoldBackgroundColor: Color(0xFF16191d),
+        primarySwatch: Colors.blueGrey,
+        useMaterial3: true,
+        inputDecorationTheme: InputDecorationTheme(
+          border: OutlineInputBorder(),
+        ),
+        textTheme: GoogleFonts.poppinsTextTheme(),
+      ),
       routerConfig: _router,
     );
   }
@@ -40,6 +62,7 @@ class WeatherApp extends StatelessWidget {
     initialLocation: '/',
     routes: [
       GoRoute(path: '/', builder: (context, state) => const SplashPage()),
+      GoRoute(path: '/home', builder: (context, state) => const HomePage()),
     ],
   );
 }
