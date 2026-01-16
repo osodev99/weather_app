@@ -6,9 +6,9 @@ import 'package:go_router/go_router.dart';
 import 'core/di/injection_container.dart' as di;
 
 import 'features/location/presentation/provider/location_provider.dart';
-import 'features/weather/pages/home_page.dart';
-import 'features/weather/pages/splash_page.dart';
-import 'features/weather/provider/weather_provider.dart';
+import 'features/weather/presentation/pages/home_page.dart';
+import 'features/weather/presentation/pages/splash_page.dart';
+import 'features/weather/presentation/provider/weather_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

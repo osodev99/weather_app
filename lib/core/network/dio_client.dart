@@ -12,7 +12,7 @@ class DioClient {
       connectTimeout: allTimeDuration,
       receiveTimeout: allTimeDuration,
     ),
-  )..interceptors.add(LogInterceptor());
+  )..interceptors.add(LogInterceptor(responseBody: true));
 
   Dio get geocodingApi => Dio(
     BaseOptions(
@@ -20,7 +20,7 @@ class DioClient {
       connectTimeout: allTimeDuration,
       receiveTimeout: allTimeDuration,
     ),
-  )..interceptors.add(LogInterceptor());
+  )..interceptors.add(LogInterceptor(responseBody: true));
 
   Dio get openStreetMapApi => Dio(
     BaseOptions(
@@ -32,5 +32,5 @@ class DioClient {
         'content-type': 'application/json',
       },
     ),
-  )..interceptors.add(LogInterceptor());
+  )..interceptors.add(LogInterceptor(responseBody: true));
 }
