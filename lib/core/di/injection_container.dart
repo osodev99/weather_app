@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../features/location/data/location_api.dart';
 import '../../features/search/data/search_api.dart';
+import '../../features/weather/data/weather_api.dart';
 import '../network/dio_client.dart';
 import '../network/network_info.dart';
 
@@ -22,4 +23,5 @@ Future<void> init() async {
   // Api
   sl.registerLazySingleton(() => LocationApi(dioClient: sl()));
   sl.registerLazySingleton(() => SearchApi(dioClient: sl()));
+  sl.registerLazySingleton(() => WeatherApi(dioClient: sl()));
 }

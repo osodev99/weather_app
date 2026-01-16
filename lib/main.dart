@@ -23,7 +23,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => WeatherProvider()),
+        ChangeNotifierProvider(
+          create: (_) => WeatherProvider(
+            prefs: di.sl(),
+            weatherApi: di.sl(),
+            locationApi: di.sl(),
+          ),
+        ),
         ChangeNotifierProvider(
           create: (_) => LocationProvider(
             dioClient: di.sl(),
